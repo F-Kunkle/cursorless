@@ -16,6 +16,7 @@ import { runCommand } from "./runCommand";
 import { runIntegrationTests } from "./runIntegrationTests";
 import { injectIde } from "./singletons/ide.singleton";
 import { ScopeRangeWatcher } from "./ScopeVisualizer/ScopeRangeWatcher";
+import { ScopeSupportWatcher } from "./ScopeVisualizer/ScopeSupportWatcher";
 
 export function createCursorlessEngine(
   treeSitter: TreeSitter,
@@ -103,6 +104,7 @@ function createScopeProvider(
 
   const rangeWatcher = new ScopeRangeWatcher(rangeProvider);
   const supportChecker = new ScopeSupportChecker(scopeHandlerFactory);
+  const supportWatcher = new ScopeSupportWatcher(supportChecker);
 
   return {
     provideScopeRanges: rangeProvider.provideScopeRanges,
@@ -112,5 +114,6 @@ function createScopeProvider(
       rangeWatcher.onDidChangeIterationScopeRanges,
     getScopeSupport: supportChecker.getScopeSupport,
     getIterationScopeSupport: supportChecker.getIterationScopeSupport,
+    onDidChangeScopeSupport: supportWatcher.onDidChangeScopeSupport,
   };
 }

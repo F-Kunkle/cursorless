@@ -37,6 +37,7 @@ import {
   ScopeVisualizerCommandApi,
   VisualizationType,
 } from "./ScopeVisualizerCommandApi";
+import { ScopeSupportTreeProvider } from "./ScopeSupportTreeProvider";
 
 /**
  * Extension entrypoint called by VSCode on Cursorless startup.
@@ -87,6 +88,7 @@ export async function activate(
 
   const statusBarItem = StatusBarItem.create("cursorless.showQuickPick");
   const keyboardCommands = KeyboardCommands.create(context, statusBarItem);
+  ScopeSupportTreeProvider.create(context, scopeProvider);
 
   registerCommands(
     context,

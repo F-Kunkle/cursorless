@@ -76,6 +76,14 @@
     }
   },
   "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "cursorlessScopeSupport",
+          "name": "Cursorless scope support"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "cursorless.toggleDecorations",
