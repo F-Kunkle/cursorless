@@ -1,19 +1,20 @@
 languageId: typescript
 command:
-  version: 1
+  version: 2
   spokenForm: take vest past after air
-  action: setSelection
+  action: {name: setSelection}
   targets:
     - type: range
-      start:
+      anchor:
         type: primitive
         mark: {type: decoratedSymbol, symbolColor: default, character: v}
-      end:
+      active:
         type: primitive
-        position: after
+        position: end
         mark: {type: decoratedSymbol, symbolColor: default, character: a}
-      excludeStart: false
-      excludeEnd: false
+      excludeAnchor: false
+      excludeActive: false
+  usePrePhraseSnapshot: true
 initialState:
   documentContents: |
 

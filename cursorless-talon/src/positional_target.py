@@ -24,10 +24,12 @@ def cursorless_positional_target(m) -> dict[str, Any]:
 
 def update_first_primitive_target(target: dict[str, Any], modifier: dict[str, Any]):
     if target["type"] == "primitive":
-        if "modifiers" not in target:
-            target["modifiers"] = []
-        target["modifiers"].insert(0, modifier)
-        return target
+        modifiers = target["modifiers"] if "modifiers" in target else []
+        modifiers.insert(0, modifier)
+        result = {"type": "primitive", "modifiers": modifiers}
+        if "mark" in target:
+            result["mark"] = target["mark"]
+        return result
     elif target["type"] == "range":
         return {
             **target,

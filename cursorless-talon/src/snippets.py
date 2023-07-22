@@ -49,6 +49,7 @@ wrapper_snippets = {
     "link": "link.text",
 }
 
+
 # NOTE: Please do not change these dicts.  Use the CSVs for customization.
 # See https://www.cursorless.org/docs/user/customization/
 insertion_snippets_no_phrase = {
