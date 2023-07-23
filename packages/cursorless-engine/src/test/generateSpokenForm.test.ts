@@ -11,7 +11,6 @@ import * as assert from "node:assert";
 import * as fs from "node:fs";
 import { promises as fsp } from "node:fs";
 import * as path from "node:path";
-
 import { canonicalizeSpokenFormTestCommand } from "../core/commandVersionUpgrades/canonicalizeSpokenFormTestCommand";
 
 suite.skip("Generate spoken forms", async function () {
@@ -33,7 +32,7 @@ async function runTest(file: string) {
     return;
   }
 
-  const suffix = getHatTokenMapSuffix(file, fixture.command);
+  const suffix = await getHatTokenMapSuffix(file, fixture.command);
   const spokenForm = spokenFormCommand.spokenForm + suffix;
 
   if (shouldUpdateFixtures()) {
@@ -46,8 +45,11 @@ async function runTest(file: string) {
   }
 }
 
-function getHatTokenMapSuffix(file: string, command: Command): string {
-  if (command.spokenForm == null || !isHatTokenMapTest(file)) {
+async function getHatTokenMapSuffix(
+  file: string,
+  command: Command,
+): Promise<string> {
+  if (command.spokenForm == null || !(await isHatTokenMapTest(file))) {
     return "";
   }
 
