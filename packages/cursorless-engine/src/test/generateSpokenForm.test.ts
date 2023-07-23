@@ -13,7 +13,7 @@ import { promises as fsp } from "node:fs";
 import * as path from "node:path";
 import { canonicalizeSpokenFormTestCommand } from "../core/commandVersionUpgrades/canonicalizeSpokenFormTestCommand";
 
-suite.skip("Generate spoken forms", async function () {
+suite.skip("Generate spoken forms", () => {
   const relativeDir = path.dirname(getRecordedTestsDirPath());
 
   getRecordedTestPaths().forEach((testPath) =>
