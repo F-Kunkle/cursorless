@@ -123,7 +123,7 @@ function canonicalizeTargetsV5(
         excludeActive: target.excludeActive,
       };
       if (target.rangeType != null) {
-        result.rangeType === target.rangeType;
+        result.rangeType = target.rangeType;
       }
       return result;
     }
@@ -322,7 +322,11 @@ function getRangeConnective(
   if (excludeActive) {
     return prefix + connectives.rangeExcludingEnd;
   }
-  return prefix + connectives.rangeInclusive;
+  if (type === "vertical") {
+    // "slice", but could have been "slice past"
+    return connectives.verticalRange;
+  }
+  return connectives.rangeInclusive;
 }
 
 function insertionModeToSpokenForm(insertionMode: InsertionMode): string {
