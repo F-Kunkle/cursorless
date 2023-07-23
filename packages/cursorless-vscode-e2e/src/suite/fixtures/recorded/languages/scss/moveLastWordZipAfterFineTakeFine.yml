@@ -1,6 +1,6 @@
 languageId: scss
 command:
-  spokenForm: move last word zip after fine take fine
+  spokenForm: move last word zip after fine
   version: 2
   targets:
     - type: primitive

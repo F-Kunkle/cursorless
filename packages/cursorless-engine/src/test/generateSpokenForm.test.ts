@@ -13,7 +13,7 @@ import { promises as fsp } from "node:fs";
 import * as path from "node:path";
 import { canonicalizeSpokenFormTestCommand } from "../core/commandVersionUpgrades/canonicalizeSpokenFormTestCommand";
 
-suite.skip("Generate spoken forms", () => {
+suite("Generate spoken forms", () => {
   const relativeDir = path.dirname(getRecordedTestsDirPath());
 
   getRecordedTestPaths().forEach((testPath) =>
@@ -70,7 +70,7 @@ async function isHatTokenMapTest(file: string): Promise<boolean> {
   const dir = path.dirname(file);
   const configFile = path.join(dir, "config.json");
   if (fs.existsSync(configFile)) {
-    const buffer = await fsp.readFile(file);
+    const buffer = await fsp.readFile(configFile);
     const config = JSON.parse(buffer.toString());
     return Boolean(config["isHatTokenMapTest"]);
   }
