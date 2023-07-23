@@ -3,6 +3,7 @@ import {
   ExcludableSnapshotField,
   extractTargetedMarks,
   getRecordedTestPaths,
+  getRecordedTestsDirPath,
   HatStability,
   marksToPlainObject,
   omitByDeep,
@@ -27,9 +28,10 @@ import {
   runCursorlessCommand,
 } from "@cursorless/vscode-common";
 import { assert } from "chai";
-import { promises as fsp } from "fs";
 import * as yaml from "js-yaml";
 import { isUndefined } from "lodash";
+import { promises as fsp } from "node:fs";
+import * as path from "node:path";
 import * as vscode from "vscode";
 import asyncSafety from "../asyncSafety";
 import { endToEndTestSetup, sleepWithBackoff } from "../endToEndTestSetup";
@@ -55,10 +57,12 @@ suite("recorded test cases", async function () {
     setupFake(ide, HatStability.stable);
   });
 
-  getRecordedTestPaths().forEach((path) =>
+  const relativeDir = path.dirname(getRecordedTestsDirPath());
+
+  getRecordedTestPaths().forEach((testPath) =>
     test(
-      path.split(".")[0],
-      asyncSafety(() => runTest(path, getSpy()!)),
+      path.relative(relativeDir, testPath.split(".")[0]),
+      asyncSafety(() => runTest(testPath, getSpy()!)),
     ),
   );
 });
