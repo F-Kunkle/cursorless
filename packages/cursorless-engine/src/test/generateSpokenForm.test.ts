@@ -68,8 +68,8 @@ async function isHatTokenMapTest(file: string): Promise<boolean> {
   const dir = path.dirname(file);
   const configFile = path.join(dir, "config.json");
   if (fs.existsSync(configFile)) {
-    const buffer = await fsp.readFile(file, { encoding: "utf-8" });
-    const config = JSON.parse(buffer);
+    const buffer = await fsp.readFile(file);
+    const config = JSON.parse(buffer.toString());
     return Boolean(config["isHatTokenMapTest"]);
   }
   return false;
