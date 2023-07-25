@@ -11,7 +11,8 @@ import * as assert from "node:assert";
 import * as fs from "node:fs";
 import { promises as fsp } from "node:fs";
 import * as path from "node:path";
-import { canonicalizeSpokenFormTestCommand } from "../core/commandVersionUpgrades/canonicalizeSpokenFormTestCommand";
+import { canonicalizeAndValidateCommand } from "../core/commandVersionUpgrades/canonicalizeAndValidateCommand";
+import { generateSpokenForm } from "../core/commandVersionUpgrades/generateSpokenForm";
 
 suite("Generate spoken forms", () => {
   const relativeDir = path.dirname(getRecordedTestsDirPath());
@@ -26,14 +27,15 @@ suite("Generate spoken forms", () => {
 async function runTest(file: string) {
   const buffer = await fsp.readFile(file);
   const fixture = yaml.load(buffer.toString()) as TestCaseFixtureLegacy;
-  const spokenFormCommand = canonicalizeSpokenFormTestCommand(fixture.command);
+  const commandLatest = canonicalizeAndValidateCommand(fixture.command);
+  const generatedSpokenForm = generateSpokenForm(commandLatest);
 
-  if (spokenFormCommand == null) {
+  if (generatedSpokenForm == null) {
     return;
   }
 
   const suffix = await getHatTokenMapSuffix(file, fixture.command);
-  const spokenForm = spokenFormCommand.spokenForm + suffix;
+  const spokenForm = generatedSpokenForm + suffix;
 
   if (shouldUpdateFixtures()) {
     if (fixture.command.spokenForm !== spokenForm) {
