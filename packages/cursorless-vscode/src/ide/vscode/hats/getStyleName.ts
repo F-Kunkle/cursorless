@@ -1,4 +1,4 @@
-import { HatColor, HatShape, VscodeHatStyleName } from "../hatStyles.types";
+import { HatColor, HatShape, VscodeHatStyleName } from "@cursorless/common";
 
 export function getStyleName(
   color: HatColor,

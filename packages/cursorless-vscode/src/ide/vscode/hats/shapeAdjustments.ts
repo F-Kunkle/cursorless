@@ -1,4 +1,4 @@
-import { HatShape } from "../hatStyles.types";
+import { HatShape } from "@cursorless/common";
 
 export interface HatAdjustments {
   sizeAdjustment?: number;

@@ -5,10 +5,11 @@ import {
   PartialPrimitiveTargetDescriptor,
   PartialTargetDescriptor,
   SimpleScopeTypeType,
+  HatColor,
+  HatShape,
 } from "@cursorless/common";
 import { runCursorlessCommand } from "@cursorless/vscode-common";
 import * as vscode from "vscode";
-import type { HatColor, HatShape } from "../ide/vscode/hatStyles.types";
 import { getStyleName } from "../ide/vscode/hats/getStyleName";
 import KeyboardCommandsModal from "./KeyboardCommandsModal";
 import KeyboardHandler from "./KeyboardHandler";

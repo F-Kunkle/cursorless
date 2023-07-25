@@ -1,5 +1,5 @@
+import { HatColor } from "@cursorless/common";
 import * as vscode from "vscode";
-import { HatColor } from "../hatStyles.types";
 
 interface OldDecorationColorSetting {
   dark: string;

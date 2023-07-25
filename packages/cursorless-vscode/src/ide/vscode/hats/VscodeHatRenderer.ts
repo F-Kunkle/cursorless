@@ -1,20 +1,25 @@
+import {
+  HAT_SHAPES,
+  HatShape,
+  Listener,
+  Notifier,
+  VscodeHatStyleName,
+} from "@cursorless/common";
 import { readFileSync } from "fs";
 import { cloneDeep, isEqual } from "lodash";
 import { join } from "path";
 import * as vscode from "vscode";
-import getHatThemeColors from "./getHatThemeColors";
-import {
-  defaultShapeAdjustments,
-  DEFAULT_HAT_HEIGHT_EM,
-  DEFAULT_VERTICAL_OFFSET_EM,
-  IndividualHatAdjustmentMap,
-} from "./shapeAdjustments";
-import { Listener, Notifier } from "@cursorless/common";
-import { FontMeasurements } from "./FontMeasurements";
-import { HatShape, HAT_SHAPES, VscodeHatStyleName } from "../hatStyles.types";
 import VscodeEnabledHatStyleManager, {
   ExtendedHatStyleMap,
 } from "../VscodeEnabledHatStyleManager";
+import { FontMeasurements } from "./FontMeasurements";
+import getHatThemeColors from "./getHatThemeColors";
+import {
+  DEFAULT_HAT_HEIGHT_EM,
+  DEFAULT_VERTICAL_OFFSET_EM,
+  IndividualHatAdjustmentMap,
+  defaultShapeAdjustments,
+} from "./shapeAdjustments";
 
 type HatDecorationMap = Partial<
   Record<VscodeHatStyleName, vscode.TextEditorDecorationType>

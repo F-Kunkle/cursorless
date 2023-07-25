@@ -7,8 +7,8 @@ import {
   HatAdjustments,
   IndividualHatAdjustmentMap,
 } from "../../ide/vscode/hats/shapeAdjustments";
-import { HAT_SHAPES } from "../../ide/vscode/hatStyles.types";
 import { postProcessValue } from "./lib";
+import { HAT_SHAPES } from "@cursorless/common";
 
 /**
  * Fill this object with any tweaks you've made to your settings.json

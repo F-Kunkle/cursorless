@@ -7,16 +7,16 @@ import {
   Notifier,
   Range,
   TextEditor,
+  VscodeHatStyleName,
 } from "@cursorless/common";
 import { toVscodeRange } from "@cursorless/vscode-common";
 import * as vscode from "vscode";
 import { Disposable } from "vscode";
-import { VscodeHatStyleName } from "../hatStyles.types";
 import VscodeEnabledHatStyleManager from "../VscodeEnabledHatStyleManager";
 import type { VscodeIDE } from "../VscodeIDE";
 import { VscodeTextEditorImpl } from "../VscodeTextEditorImpl";
-import VscodeHatRenderer from "./VscodeHatRenderer";
 import { FontMeasurements } from "./FontMeasurements";
+import VscodeHatRenderer from "./VscodeHatRenderer";
 
 export class VscodeHats implements Hats {
   private enabledHatStyleManager: VscodeEnabledHatStyleManager;

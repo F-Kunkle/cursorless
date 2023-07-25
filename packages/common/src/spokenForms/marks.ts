@@ -1,4 +1,6 @@
-const hatColors: Record<string, string> = {
+import { HatColor, HatShape } from "../types/command/hatStyles.types";
+
+const hatColors: Record<HatColor, string | null> = {
   blue: "blue",
   green: "green",
   red: "red",
@@ -6,9 +8,11 @@ const hatColors: Record<string, string> = {
   yellow: "yellow",
   userColor1: "navy",
   userColor2: "apricot",
+
+  default: null,
 };
 
-const hatShapes: Record<string, string> = {
+const hatShapes: Record<HatShape, string | null> = {
   ex: "ex",
   fox: "fox",
   wing: "wing",
@@ -19,6 +23,8 @@ const hatShapes: Record<string, string> = {
   play: "play",
   crosshairs: "cross",
   bolt: "bolt",
+
+  default: null,
 };
 
 const marks: Record<string, string | null> = {
@@ -37,7 +43,7 @@ export const lineDirections = {
 };
 
 export function hatColorToSpokenForm(color: string): string {
-  const result = hatColors[color];
+  const result = hatColors[color as HatColor];
   if (result == null) {
     throw Error(`Unknown hat color '${color}'`);
   }
@@ -45,7 +51,7 @@ export function hatColorToSpokenForm(color: string): string {
 }
 
 export function hatShapeToSpokenForm(shape: string): string {
-  const result = hatShapes[shape];
+  const result = hatShapes[shape as HatShape];
   if (result == null) {
     throw Error(`Unknown hat shape '${shape}'`);
   }
