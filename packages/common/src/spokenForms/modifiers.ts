@@ -1,4 +1,5 @@
 import {
+  CompositeKeyMap,
   ModifierType,
   NoSpokenFormError,
   ScopeTypeType,
@@ -144,15 +145,16 @@ const surroundingPairsDelimiters: Record<
   string: null,
   collectionBoundary: null,
 };
-const surroundingPairDelimiterToName = Object.entries(
-  surroundingPairsDelimiters,
-).reduce<Record<string, SurroundingPairName>>((result, [name, pair]) => {
+const surroundingPairDelimiterToName = new CompositeKeyMap<
+  [string, string],
+  SurroundingPairName
+>((pair) => pair);
+
+for (const [name, pair] of Object.entries(surroundingPairsDelimiters)) {
   if (pair != null) {
-    const key = `${pair[0]} ${pair[1]}`;
-    result[key] = name as SurroundingPairName;
+    surroundingPairDelimiterToName.set(pair, name as SurroundingPairName);
   }
-  return result;
-}, {});
+}
 
 export const surroundingPairForceDirections = {
   left: "left",
@@ -193,8 +195,7 @@ export function surroundingPairDelimitersToSpokenForm(
   left: string,
   right: string,
 ): string {
-  const key = `${left} ${right}`;
-  const pairName = surroundingPairDelimiterToName[key];
+  const pairName = surroundingPairDelimiterToName.get([left, right]);
   if (pairName == null) {
     throw Error(`Unknown surrounding pair delimiters '${left} ${right}'`);
   }

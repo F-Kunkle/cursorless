@@ -1,7 +1,7 @@
 export const connectives = {
   rangeExclusive: "between",
   rangeInclusive: "past",
-  // "rangeExcludingStart": "-",
+  // Note: rangeExcludingStart has no default spoken form so we leave it out
   rangeExcludingEnd: "until",
   listConnective: "and",
   swapConnective: "with",
