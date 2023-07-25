@@ -26,7 +26,7 @@ import {
   modifiersExtra,
   numberToSpokenForm,
   ordinalToSpokenForm,
-  scopeToSpokenForm,
+  scopeTypeTypeToSpokenForm,
   surroundingPairDelimitersToSpokenForm,
   surroundingPairForceDirections,
   surroundingPairToSpokenForm,
@@ -406,7 +406,7 @@ function scopeTypeToSpokenForm(scopeType: ScopeType): string {
     }
 
     default:
-      return scopeToSpokenForm(scopeType.type);
+      return scopeTypeTypeToSpokenForm(scopeType.type);
   }
 }
 

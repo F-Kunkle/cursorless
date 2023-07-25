@@ -189,8 +189,6 @@ export type ScopeType =
   | CustomRegexScopeType
   | OneOfScopeType;
 
-export type ScopeTypeType = ScopeType["type"];
-
 export interface ContainingSurroundingPairModifier
   extends ContainingScopeModifier {
   scopeType: SurroundingPairScopeType;

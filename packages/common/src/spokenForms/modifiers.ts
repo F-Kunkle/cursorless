@@ -166,7 +166,7 @@ export function modifierTypeToSpokenForm(modifier: ModifierType): string {
   return result;
 }
 
-export function scopeToSpokenForm(scope: SimpleScopeTypeType): string {
+export function scopeTypeTypeToSpokenForm(scope: SimpleScopeTypeType): string {
   if (scope === "switchStatementSubject") {
     throw new NoSpokenFormError(`No spoken form for scope '${scope}'`);
   }
