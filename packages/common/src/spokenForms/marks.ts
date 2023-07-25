@@ -1,3 +1,4 @@
+import { PartialMark } from "..";
 import { HatColor, HatShape } from "../types/command/hatStyles.types";
 
 const hatColors: Record<HatColor, string | null> = {
@@ -27,13 +28,18 @@ const hatShapes: Record<HatShape, string | null> = {
   default: null,
 };
 
-const marks: Record<string, string | null> = {
+type MarkType = PartialMark["type"];
+
+const marks: Record<MarkType, string | null> = {
   cursor: "this",
   that: "that",
   source: "source",
   nothing: "nothing",
 
   explicit: null,
+  decoratedSymbol: null,
+  lineNumber: null,
+  range: null,
 };
 
 export const lineDirections = {
@@ -58,7 +64,7 @@ export function hatShapeToSpokenForm(shape: string): string {
   return result;
 }
 
-export function markTypeToSpokenForm(mark: string): string {
+export function markTypeToSpokenForm(mark: MarkType): string {
   const result = marks[mark];
   if (result == null) {
     throw Error(`Unknown mark '${mark}'`);
