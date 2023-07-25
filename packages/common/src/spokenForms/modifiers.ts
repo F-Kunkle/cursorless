@@ -2,7 +2,7 @@ import {
   CompositeKeyMap,
   ModifierType,
   NoSpokenFormError,
-  ScopeTypeType,
+  SimpleScopeTypeType,
   SurroundingPairName,
 } from "..";
 
@@ -38,7 +38,7 @@ export const modifiersExtra = {
   backward: "backward",
 };
 
-const scopes: Record<ScopeTypeType, string | null> = {
+const scopes: Record<SimpleScopeTypeType, string | null> = {
   argumentOrParameter: "arg",
   attribute: "attribute",
   functionCall: "call",
@@ -100,9 +100,6 @@ const scopes: Record<ScopeTypeType, string | null> = {
   notebookCell: "cell",
 
   switchStatementSubject: null,
-  surroundingPair: null,
-  customRegex: null,
-  oneOf: null,
 };
 
 const surroundingPairsSpoken: Record<SurroundingPairName, string | null> = {
@@ -169,7 +166,7 @@ export function modifierTypeToSpokenForm(modifier: ModifierType): string {
   return result;
 }
 
-export function scopeToSpokenForm(scope: ScopeTypeType): string {
+export function scopeToSpokenForm(scope: SimpleScopeTypeType): string {
   if (scope === "switchStatementSubject") {
     throw new NoSpokenFormError(`No spoken form for scope '${scope}'`);
   }
