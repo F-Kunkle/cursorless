@@ -27,15 +27,14 @@ suite("Generate spoken forms", () => {
 async function runTest(file: string) {
   const buffer = await fsp.readFile(file);
   const fixture = yaml.load(buffer.toString()) as TestCaseFixtureLegacy;
-  const commandLatest = canonicalizeAndValidateCommand(fixture.command);
-  const generatedSpokenForm = generateSpokenForm(commandLatest);
+  const spokenForm = await generateSpokenFormWithHatTokenMapSuffix(
+    file,
+    fixture.command,
+  );
 
-  if (generatedSpokenForm == null) {
-    return;
+  if (spokenForm == null) {
+    return null;
   }
-
-  const suffix = await getHatTokenMapSuffix(file, fixture.command);
-  const spokenForm = generatedSpokenForm + suffix;
 
   if (shouldUpdateFixtures()) {
     if (fixture.command.spokenForm !== spokenForm) {
@@ -45,6 +44,21 @@ async function runTest(file: string) {
   } else {
     assert.equal(fixture.command.spokenForm, spokenForm);
   }
+}
+
+async function generateSpokenFormWithHatTokenMapSuffix(
+  file: string,
+  command: Command,
+): Promise<string | null> {
+  const commandLatest = canonicalizeAndValidateCommand(command);
+  const generatedSpokenForm = generateSpokenForm(commandLatest);
+
+  if (generatedSpokenForm == null) {
+    return null;
+  }
+
+  const suffix = await getHatTokenMapSuffix(file, command);
+  return generatedSpokenForm + suffix;
 }
 
 async function getHatTokenMapSuffix(
