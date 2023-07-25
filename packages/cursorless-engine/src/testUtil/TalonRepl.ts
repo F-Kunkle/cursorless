@@ -58,6 +58,6 @@ export class TalonRepl {
 
 function getReplPath() {
   return os.platform() === "win32"
-    ? `${os.homedir()}\\AppData\\Roaming\\talon\\.venv\\Scripts\\repl.bat`
+    ? `${os.homedir()}\\AppData\\Roaming\\talon\\venv\\3.11\\Scripts\\repl.bat`
     : `${os.homedir()}/.talon/.venv/bin/repl`;
 }
