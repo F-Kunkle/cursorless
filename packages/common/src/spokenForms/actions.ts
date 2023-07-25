@@ -63,9 +63,6 @@ const actions: Record<ActionType, string | null> = {
 };
 
 export function actionToSpokenForm(name: ActionType): string {
-  if (name === "wrapWithSnippet") {
-    name = "wrapWithPairedDelimiter";
-  }
   const result = actions[name];
   if (result == null) {
     throw Error(`Unknown action '${name}'`);
